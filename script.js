@@ -1,12 +1,10 @@
-var isDate = function (input) {
-    if (input instanceof Date && !isNaN(input)) return true; // If it's a Date object
-    if (typeof input === "string") {
-        const parsedDate = new Date(input);
-        return !isNaN(parsedDate.getTime()); // If string can be converted to a valid date
+const date = new Date().toISOString(); // Convert Date to a valid string format
+cy.visit(baseUrl, {
+    onBeforeLoad(win) {
+        cy.stub(win, "prompt").onFirstCall().returns(date); // Return a valid date string
     }
-    return false;
-};
+});
 
-// Do not change the code below.
-const input = prompt("Enter Date.");
-alert(isDate(input));
+cy.on("window:alert", (str) => {
+    expect(str).to.equal("true"); // alert() returns a string, so compare with "true"
+});
