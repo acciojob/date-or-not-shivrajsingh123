@@ -1,10 +1,10 @@
 var isDate = function (input) {
-    if (input instanceof Date && !isNaN(input)) return true; // Check if it's a valid Date object
-    if (typeof input === "string" || typeof input === "number") {
+    if (input instanceof Date && !isNaN(input)) return true; // If it's a Date object
+    if (typeof input === "string") {
         const parsedDate = new Date(input);
-        return !isNaN(parsedDate.getTime()); // Check if it can be parsed into a valid date
+        return !isNaN(parsedDate.getTime()); // If string can be converted to a valid date
     }
-    return false; // If it's not a valid date
+    return false;
 };
 
 // Do not change the code below.
